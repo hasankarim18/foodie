@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import DISHES from '../../data/dishes';
 import DishDetails from "./DishDetails";
 import DishItem from "./DishItem";
+import DetailModal from "../utils/DetailModal";
 
 const Dishes = () => {
   const [selectedDish, setSelectedDish] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const dishes = DISHES;
 
@@ -15,9 +17,19 @@ const Dishes = () => {
     })
     setSelectedDish(() => seletedDish);
   };
+   const modalToggle = () => {
+      setIsModalOpen((prev)=> !prev);
+    };
 
     const showDishes = dishes.map((item)=> {
-        return <DishItem key={item.id} selectDish={selectDish} dish={item} />
+        return (
+          <DishItem
+            openDishDetail={modalToggle}
+            key={item.id}
+            selectDish={selectDish}
+            dish={item}
+          />
+        );
     })
 
 
@@ -29,11 +41,12 @@ const Dishes = () => {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-6">
-          <div className="row">{showDishes}</div>
-        </div>
-        <div className="col-6">{showSelectedDish}</div>
+      <div className="row">{showDishes}</div>
+      {/*dish detail modal  */}
+      <div>
+        <DetailModal toggle={modalToggle} isOpen={isModalOpen} >
+            {showSelectedDish}
+        </DetailModal>
       </div>
     </div>
   );

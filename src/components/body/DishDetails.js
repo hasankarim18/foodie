@@ -45,9 +45,20 @@ const DishDetails = ({ dishDetail }) => {
         </CardFooter>
       </Card>
       <div className="mt-4">
-        <h2 className="cursor-pointer d-flex align-items-center" onClick={commentToggle}>
+        <h2
+          className="cursor-pointer d-flex align-items-center"
+          onClick={commentToggle}
+        >
           <span className="me-3">Show Comments:</span>
-          <i className="fa-solid fa-chevron-down"></i>
+          <span
+            style={{
+              color: "red",
+              transition:"0.3s ease-in-out",
+              transform: `rotate(${isCommentOpen? '-180deg':'0deg'})`
+            }}
+          >
+            <i className={`fa-solid fa-chevron-down`}></i>
+          </span>
         </h2>
         <CollapseUtil isOpen={isCommentOpen}>
           <Comments comments={comments} />

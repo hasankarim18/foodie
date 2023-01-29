@@ -2,21 +2,25 @@ import React from 'react'
 import dateFormat from "dateformat";
 
 const Comments = ({ comments }) => {
-  console.log(comments);
  const shwoComment = comments.map((item)=> {
     return (
-      <div className="mb-2" key={item.id}>
-        <h4>{item.author}</h4>
+      <div className="mb-2 pb-3 border-bottom border-primary" key={item.id}>
+        <h4>
+          <u>Author:</u> {item.author}
+        </h4>
         <p className="" align="justify">
-        <i>Comment: </i>  {item.comment}
+          <i>
+            <u>Comment:</u>{" "}
+          </i>{" "}
+          {item.comment}
         </p>
         <div className="d-flex justify-content-between">
-          <div className="date" > 
-            {
-              dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")
-            }
+          <div className="date">
+           <i><u>Date: </u></i> {dateFormat(item.date, "dd, mmm, yyyy")}
           </div>
-          <div className="rating" > Rating: {item.rating} <i class="fa-solid fa-star"></i> </div>
+          <div className="rating">
+            <i><u>Rating: </u></i> {item.rating} <i class="fa-solid fa-star"></i>{" "}
+          </div>
         </div>
       </div>
     );

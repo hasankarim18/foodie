@@ -2,3 +2,22 @@
 .cursor-pointer {
     cursor: pointer;
 }
+
+.menu_card{
+    transition: 0.3s ease-in-out;
+}
+
+.menu_card .card_img{
+    height: 200px;
+}
+
+.menu_card .card_title{
+    color: white;
+}
+
+.menu_card:hover .card_title{
+    color:rgb(221, 22, 22);
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}

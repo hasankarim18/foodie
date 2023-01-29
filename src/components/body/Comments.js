@@ -37,8 +37,7 @@ const Comments = ({ comments }) => {
   
     return (
       <div className="mb-2 pb-3 border-bottom border-primary" key={item.id}>
-        <h4>
-          <i className="fa-solid fa-star" style={{ color: "gold" }}></i>
+        <h4>         
           <u>Author:</u> {item.author}
         </h4>
         <p className="" align="justify">
@@ -51,7 +50,7 @@ const Comments = ({ comments }) => {
           <div className="date">
             <i>
               <u>Date: </u>
-            </i>{" "}
+            </i>
             {dateFormat(item.date, "dd, mmm, yyyy")}
           </div>
           <div className="rating">

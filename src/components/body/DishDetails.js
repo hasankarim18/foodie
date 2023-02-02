@@ -7,8 +7,8 @@ import Comments from "./Comments";
 
 const DishDetails = ({ dishDetail }) => {
   const [isCommentOpen, setIsCommentOpen] = useState(false)
-  const {name, description, image, category, label, price,comments} = dishDetail;
-
+  const {name, description, image, category, label, price,id} = dishDetail;
+ 
   const commentToggle = ()=> {
     setIsCommentOpen((prev)=> !prev)
   }
@@ -61,7 +61,7 @@ const DishDetails = ({ dishDetail }) => {
           </span>
         </h2>
         <CollapseUtil isOpen={isCommentOpen}>
-          <Comments comments={comments} />
+          <Comments dishId={id} />
         </CollapseUtil>
       </div>
     </div>

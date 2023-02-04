@@ -1,6 +1,9 @@
 import React from 'react'
 
+
+
 const About = () => {
+  document.title = "About";
   return (
     <div className="container">
       <h1>This is About</h1>

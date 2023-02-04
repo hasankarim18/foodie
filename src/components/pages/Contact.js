@@ -1,7 +1,10 @@
 import React from "react";
 import ContactForm from "../body/ContactForm";
 
+ 
+// 
 const Contact = () => {
+  document.title = "Contact";
   return (
     <div className="container ">
       <h1 className="text-center">Send us your feedback</h1>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import dateFormat from "dateformat";
-import COMMENTS from '../../data/comments';
 import { Spinner } from 'reactstrap';
+import { useSelector } from 'react-redux';
 
 const Comments = ({ dishId }) => {
- const [comments,setComments ] = useState([])
-  
- const [load , setLoad] = useState(false)
+  const allComments = useSelector((state) => state.comments);
+ const [comments,setComments ] = useState([])  
+ const [load , setLoad] = useState(false);
 
 
 
@@ -16,12 +16,12 @@ const Comments = ({ dishId }) => {
    }, 2000);
 
   if(load){
-  const selectedComments = COMMENTS.filter((item)=> {
-    return item.dishId === dishId
-  })
+  const selectedComments = allComments.filter((item) => {
+    return item.dishId === dishId;
+  });
     setComments(selectedComments);
 }
- }, [load, dishId])
+ }, [load, dishId, allComments])
 
  if(comments.length > 0){
    const shwoComment = comments.map((item) => {
@@ -87,8 +87,6 @@ const Comments = ({ dishId }) => {
  }else {
   return <Spinner />
  }
-
-
 };
 
 export default Comments

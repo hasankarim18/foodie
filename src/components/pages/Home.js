@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
-const Home = () => {
-   document.title = "Home";
-  return (
-    <div className="container ">
-        <h1>This is home page</h1>
-    </div>
-  )
+
+const mapStateToProps = (state)=> {
+  return {
+    dishes:state.dishes
+  }
 }
 
-export default Home
+ class Home extends Component {
+
+  componentDidMount(){
+    console.log('Home state', this.state);
+    console.log('Home props', this.props);
+  }
+
+
+  render() {
+    return (
+      <div>
+        <div className="container" >
+           <h1>This is home page</h1>
+          </div>
+      </div>
+    )
+  }
+}
+
+
+export default connect(mapStateToProps)(Home);

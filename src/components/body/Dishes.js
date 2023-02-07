@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import DISHES from '../../data/dishes';
 import DishDetails from "./DishDetails";
 import DishItem from "./DishItem";
 import DetailModal from "../utils/DetailModal";
+import { useSelector } from "react-redux";
 
 const Dishes = () => {
+  const state =  useSelector((state)=> state)
+
   const [selectedDish, setSelectedDish] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const dishes = DISHES;
+  const dishes = state.dishes;
 
   const selectDish = (id) => {
     const selectedId = id;

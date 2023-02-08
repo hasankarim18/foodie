@@ -13,16 +13,16 @@ const CommentForm = ({dishId}) => {
     dishId: dishId,
   });
 
-    const onSubmit = (e)=> {
-        e.preventDefault() 
-        dispatch(addComment(formData))
-         setFormData({
-           author: "",
-           rating: 3,
-           comment: "",
-           dishId: dishId,
-         });    
-    }
+const onSubmit = (e)=> {
+    e.preventDefault() 
+    dispatch(addComment(formData))
+        setFormData({
+        author: "",
+        rating: 3,
+        comment: "",
+        dishId: dishId,
+        });    
+}
 
 
     const handleInputChange = (e)=> {

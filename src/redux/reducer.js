@@ -1,46 +1,30 @@
 import DISHES from "../data/dishes";
 import COMMENTS from "../data/comments";
+import { combineReducers } from "redux";
 
-const initialState = {
-    dishes:DISHES,
-    comments:COMMENTS, 
-    homeCounter:0,
-   // dishComment:{}
 
+const dishReducer = (state=DISHES, action)=> {
+  return state;
 }
 
-
-const Reducer = (state = initialState, action)=> {
+const commentReducer = (state=COMMENTS,action)=> {
     switch (action.type) {
-      case "INCREASEBYFIVE":
-        return{
-            ...state,
-            homeCounter:state.homeCounter + action.payload
-        }
-
-      case "DECREASEBYFIVE":
-        return {
-          ...state,
-          homeCounter: state.homeCounter - action.payload,
-        };
-      case "RELOAD":
-        return{
-            ...state,
-            reloaded:state.reloaded+1
-        }
       case "ADDDISHCOMMENT":
         let comment = action.payload;
-        comment.id = state.comments.length;   
-        console.log('comment',comment);
-        return {
-          ...state,
-          comments:state.comments.concat(comment)
-        }
+        comment.id = state.length;
+        console.log("comment", comment);
+        return state.concat(comment)
       default:
-       return state;
+        return state;
     }
-  
 }
+
+
+
+const Reducer = combineReducers({
+  dishes:dishReducer,
+  comments:commentReducer
+})
 
 
 

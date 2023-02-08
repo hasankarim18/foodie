@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 const Comments = ({ dishId }) => {
   const allComments = useSelector((state) => state.comments);
+
  const [comments,setComments ] = useState([])  
  const [load , setLoad] = useState(false);
 

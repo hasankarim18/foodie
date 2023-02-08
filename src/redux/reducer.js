@@ -30,9 +30,7 @@ const Reducer = (state = initialState, action)=> {
         }
       case "ADDDISHCOMMENT":
         let comment = action.payload;
-        comment.id = state.comments.length;
-        comment.date = new Date().toDateString();
-        console.log(typeof comment);
+        comment.id = state.comments.length;   
         console.log('comment',comment);
         return {
           ...state,

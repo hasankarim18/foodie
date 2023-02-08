@@ -1,5 +1,7 @@
 import React, {  useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { addComment } from '../../redux/actions';
+
 
 const CommentForm = ({dishId}) => {
 // const state = useSelector((state) => state);
@@ -12,19 +14,14 @@ const CommentForm = ({dishId}) => {
   });
 
     const onSubmit = (e)=> {
-        e.preventDefault()
-        dispatch({
-            type:"ADDDISHCOMMENT",
-            payload:formData
-        })
-
+        e.preventDefault() 
+        dispatch(addComment(formData))
          setFormData({
            author: "",
            rating: 3,
            comment: "",
            dishId: dishId,
-         });
-      // console.log(formData)
+         });    
     }
 
 
@@ -35,11 +32,6 @@ const CommentForm = ({dishId}) => {
       })
     }
 
-    // useEffect(()=> {
-    //     console.log(dishComment);
-    // }, [formData])
-
-  //  console.log(state);
 
   return (
     <div className="mb-5">

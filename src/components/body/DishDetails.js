@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card,CardHeader,CardFooter, CardImg, CardBody, CardTitle } from "reactstrap";
 import CollapseUtil from "../utils/CollapseUtil";
+import CommentForm from "./CommentForm";
 import Comments from "./Comments";
 
 
@@ -61,6 +62,7 @@ const DishDetails = ({ dishDetail }) => {
           </span>
         </h2>
         <CollapseUtil isOpen={isCommentOpen}>
+          <CommentForm dishId={id} />
           <Comments dishId={id} />
         </CollapseUtil>
       </div>

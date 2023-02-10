@@ -1,6 +1,6 @@
 import React, {  useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addComment } from '../../redux/actions';
+import { addComment } from '../../redux/actionCreators';
 
 
 const CommentForm = ({dishId}) => {
@@ -15,7 +15,9 @@ const CommentForm = ({dishId}) => {
 
 const onSubmit = (e)=> {
     e.preventDefault() 
+    // dispatching the fromData action from the actionCreators
     dispatch(addComment(formData))
+    // clearing the form data
         setFormData({
         author: "",
         rating: 3,

@@ -4,15 +4,9 @@ import Dishes from '../body/Dishes'
 
 
 const Menu = () => {
- 
-
-
-
-
    document.title = "Menu";
   return (
-    <div>
-      
+    <div>      
         <Dishes />
     </div>
   )

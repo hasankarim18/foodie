@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DishDetails from "./DishDetails";
 import DishItem from "./DishItem";
 import DetailModal from "../utils/DetailModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDishes } from "../../redux/actionCreators";
+import Loading from '../../components/utils/Loading'
 
 const Dishes = () => {
-  const state =  useSelector((state)=> state)
+  const { dishes , isLoading} = useSelector((state) => state.dishes);
+  const dispatch = useDispatch()
+
+  useEffect(()=> {
+      dispatch(fetchDishes())
+  }, [dispatch])
 
   const [selectedDish, setSelectedDish] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const dishes = state.dishes;
+  //onst dishes = dishState.dishes.dishes;
+
+ // console.log(dishes);
 
   const selectDish = (id) => {
     const selectedId = id;
@@ -21,25 +30,35 @@ const Dishes = () => {
   };
    const modalToggle = () => {
       setIsModalOpen((prev)=> !prev);
+  
     };
 
-    const showDishes = dishes.map((item)=> {
-        return (
-          <DishItem
-            openDishDetail={modalToggle}
-            key={item.id}
-            selectDish={selectDish}
-            dish={item}
-          />
-        );
-    })
 
+     let showSelectedDish = null;
 
-    let showSelectedDish = null;
+     if (selectedDish) {
+       showSelectedDish = <DishDetails dishDetail={selectedDish} />;
+     }
+     // loading login
+    let showDishes = null;
 
-    if(selectedDish){
-      showSelectedDish = <DishDetails dishDetail={selectedDish} />;
+    if(isLoading === true){
+      showDishes = <Loading />
+    }else {
+     showDishes = dishes.map((item) => {
+       return (
+         <DishItem
+           openDishDetail={modalToggle}
+           key={item.id}
+           selectDish={selectDish}
+           dish={item}
+         />
+       );
+     });
     }
+
+   
+
 
   return (
     <div className="container">

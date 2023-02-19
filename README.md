@@ -11,3 +11,6 @@ To configure your redirect rules, you have to create a file that does not have a
 Include the following command in the _redirects file:
 
 /*    /index.html  200
+
+#### Open the Local server post at localhost:9000 
+by json-server db.json --watch -p 9000

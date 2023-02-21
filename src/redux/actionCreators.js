@@ -29,6 +29,15 @@ export const dishesLoading =  ()=> {
   }
 }
 
+// catch error in dishloading 
+
+const dishLoadingError = (errMessage)=> {
+  return {
+    type: actionTypes.LOAD_DISH_ERROR,
+    payload: errMessage
+  };
+}
+
 /*
   1. This function will return another function whick will take dispatch as it's paramenter
 */
@@ -48,8 +57,54 @@ export const fetchDishes = ()=> {
         }      
       })
       .catch((err)=> {
-        console.log(err);
+      //  console.log(err.message);
+        dispatch(dishLoadingError(err.message));
       })
    
     }
+}
+
+
+// fetch comments 
+
+//1. comment loading 
+
+const commentLoading = ()=> {
+  return {
+    type:actionTypes.LOADING_COMMENTS
+  }
+}
+
+//2. load comments 
+const loadComments = (comments) => {
+  return {
+    type: actionTypes.LOAD_COMMENTS,
+    payload: comments,
+  };
+};
+
+//3. catch the loading errror 
+
+const loadCommentsError = (errMess)=> {
+  return {
+    type:actionTypes.LOAD_COMMENTS_ERROR,
+    payload:errMess
+  }
+}
+
+// 4. fetch comments with thunk 
+
+
+export const fetchComments = ()=> dispatch => {
+      dispatch(commentLoading());
+
+    axios.get(baseUrl+'/comments')
+    .then((res)=> {
+      const data = res.data 
+     // console.log(data);
+      dispatch(loadComments(data));
+    })
+    .catch((err)=> {
+      dispatch(loadCommentsError(err.message));
+    })
 }

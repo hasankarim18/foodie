@@ -7,10 +7,12 @@ import { fetchDishes } from "../../redux/actionCreators";
 import Loading from '../../components/utils/Loading'
 
 const Dishes = () => {
-  const { dishes , isLoading} = useSelector((state) => state.dishes);
+  const { dishes, isLoading, dishLoadError } = useSelector(
+    (state) => state.dishes
+  );
   const dispatch = useDispatch()
 
-  console.log(dishes);
+//  console.log(dishes);
   
 
   // loading dishes
@@ -61,10 +63,13 @@ const Dishes = () => {
   return (
     <div className="container">
       <div className="row">{showDishes}</div>
+      {dishLoadError !== null ? (
+        <div className="alert alert-danger mt-5 mb-5 text-center fs-3">{dishLoadError}</div>
+      ) : null}
       {/*dish detail modal  */}
       <div>
-        <DetailModal toggle={modalToggle} isOpen={isModalOpen} >
-            {showSelectedDish}
+        <DetailModal toggle={modalToggle} isOpen={isModalOpen}>
+          {showSelectedDish}
         </DetailModal>
       </div>
     </div>

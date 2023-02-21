@@ -1,28 +1,36 @@
 import React, { useEffect, useState } from 'react'
 import dateFormat from "dateformat";
 import { Spinner } from 'reactstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchComments } from '../../redux/actionCreators';
 
 const Comments = ({ dishId }) => {
-  const allComments = useSelector((state) => state.comments);
+  const allComments = useSelector((state) => state.comments.comments);
+  const { commentLoadError } = useSelector((state) => state.comments);
+  console.log(commentLoadError);
+  const dispatch = useDispatch()
+
+  // console.log('allcomments: ',allComments);
 
  const [comments,setComments ] = useState([])  
- const [load , setLoad] = useState(false);
+
 
 
 
  useEffect(()=> {
-   setTimeout(() => {
-     setLoad(true);
-   }, 2000);
+  dispatch(fetchComments());
+ }, [dispatch])
 
-  if(load){
-  const selectedComments = allComments.filter((item) => {
-    return item.dishId === dishId;
-  });
-    setComments(selectedComments);
-}
- }, [load, dishId, allComments])
+// selecting id
+ useEffect(()=> {
+   if(allComments.length > 0){
+       const selectedComments = allComments.filter((item) => {
+         return item.dishId === dishId;
+       });
+       setComments(selectedComments);
+   }
+ }, [allComments,dishId])
+
 
  if(comments.length > 0){
    const shwoComment = comments.map((item) => {
@@ -85,7 +93,12 @@ const Comments = ({ dishId }) => {
      );
    });
    return shwoComment;
- }else {
+ }else if(commentLoadError !== null){
+  return (
+    <div className="alert alert-danger text-center">{commentLoadError}</div>
+  );
+ }
+ else {
   return <Spinner />
  }
 };

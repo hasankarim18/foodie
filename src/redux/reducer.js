@@ -42,7 +42,10 @@ const dishReducer = (state = dishState, action) => {
 const commentState = {
   isLoading:false,
   comments:[],
-  commentLoadError:null
+  commentLoadError:null,
+  commentAdding:false,
+  commentAdded:null,
+  isCommentAddedFailed:false
 }
 
 
@@ -51,9 +54,11 @@ const commentReducer = (state = commentState, action) => {
   switch (action.type) {
     case actionTypes.ADD_COMMENT:
       let comment = action.payload;
-      comment.id = state.length;
+      comment.id = state.comments.length;
+      // console.log(state.comments);
       return{
-        ...state
+        ...state,
+        comments:state.comments.concat(comment)
       }
     case actionTypes.LOADING_COMMENTS:
       return {
@@ -76,6 +81,11 @@ const commentReducer = (state = commentState, action) => {
           isLoading:false,         
           commentLoadError:action.payload
         }
+      case actionTypes.COMMENT_ADDED_FAILED:
+        return {
+          ...state,
+          isCommentAddedFailed: action.payload,
+        };
     default:
       return state;
   }

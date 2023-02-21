@@ -5,14 +5,57 @@ import axios from 'axios';
 
 
 
-export const addComment = (formData) => {
-  formData.date = new Date().toDateString();
-  return {
-    type: actionTypes.ADD_COMMENT,
-    payload: formData,
-  };
+// 1. adding comment 
+
+// const commentAdding = ()=> {
+//   return {
+//     type:actionTypes.COMMENT_ADDING
+//   }
+// }
+
+// 2. comment added 
+
+export const addComment = (formData) => dispatch => {
+
+    const comment = formData
+    comment.date = new Date().toISOString();
+     axios
+       .post(baseUrl + "/comments", comment)
+       .then((res) => {
+         if (res.status === 201 && res.statusText === "Created") {
+           dispatch(concatComment(comment));
+         }
+       })
+       .catch((err) => {
+         dispatch(commentAddedFailed(true));
+       });
+
+
 };
 
+export const concatComment = (comment)=> {
+  return {
+    type:actionTypes.ADD_COMMENT,
+    payload:comment
+  }
+}
+
+export const commentAddedFailed = (errMess)=> {
+  return {
+    type: actionTypes.COMMENT_ADDED_FAILED,
+    payload:errMess,
+  };
+}
+
+
+
+
+
+
+
+
+
+/**List of action creators for load dishes */
 
 
 export const loadDishes = (dishes)=> {

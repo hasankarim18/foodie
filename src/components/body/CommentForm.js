@@ -1,10 +1,14 @@
 import React, {  useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { addComment } from '../../redux/actionCreators';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { addComment, commentAddedFailed } from '../../redux/actionCreators';
+import CountDown from '../utils/CountDown';
 
 
 const CommentForm = ({dishId}) => {
-// const state = useSelector((state) => state);
+const { isCommentAddedFailed } = useSelector((state) => state.comments);
+
+
  const dispatch =  useDispatch();
   const [formData, setFormData] = useState({
     author: "",
@@ -16,8 +20,9 @@ const CommentForm = ({dishId}) => {
 const onSubmit = (e)=> {
     e.preventDefault() 
     // dispatching the fromData action from the actionCreators
-    dispatch(addComment(formData))
-    // clearing the form data
+    const comment = formData;
+    dispatch(addComment(comment))
+   
         setFormData({
         author: "",
         rating: 3,
@@ -33,6 +38,12 @@ const onSubmit = (e)=> {
         [e.target.name]:e.target.value
       })
     }
+
+    useEffect(()=> {
+      setTimeout(() => {
+        dispatch(commentAddedFailed(false));
+      }, 5000);
+    }, [dispatch, isCommentAddedFailed])
 
 
   return (
@@ -55,11 +66,11 @@ const onSubmit = (e)=> {
             placeholder="rating"
             max="5"
           >
-            <option value="1" >1</option>
-            <option value="2" >2</option>
-            <option  value="3" >3</option>
-            <option value="4" >4</option>
-            <option value="5" >5</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
           </select>
           <textarea
             className="form-control mb-3"
@@ -76,6 +87,14 @@ const onSubmit = (e)=> {
           </div>
         </form>
       </div>
+      {isCommentAddedFailed ? (
+        <div className="p-3 alert alert-danger">
+          <div className="d-flex justify-content-between" >
+            <span>Something went wrong! try again</span>
+            <CountDown />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -62,6 +62,7 @@ const Dishes = () => {
 
   return (
     <div className="container">
+    
       <div className="row">{showDishes}</div>
       {dishLoadError !== null ? (
         <div className="alert alert-danger mt-5 mb-5 text-center fs-3">{dishLoadError}</div>

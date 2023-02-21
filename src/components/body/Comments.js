@@ -7,7 +7,7 @@ import { fetchComments } from '../../redux/actionCreators';
 const Comments = ({ dishId }) => {
   const allComments = useSelector((state) => state.comments.comments);
   const { commentLoadError } = useSelector((state) => state.comments);
-  console.log(commentLoadError);
+
   const dispatch = useDispatch()
 
   // console.log('allcomments: ',allComments);

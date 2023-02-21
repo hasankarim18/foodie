@@ -7,7 +7,8 @@ import { combineReducers } from "redux";
 
 const dishState = {
   isLoading:false,
-  dishes:[]
+  dishes:[],
+  dishLoadError:null
 }
 
 const dishReducer = (state = dishState, action) => {

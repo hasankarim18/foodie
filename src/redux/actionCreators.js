@@ -1,5 +1,8 @@
 import * as actionTypes from './actionTypes.js'
-import DISHES from '../data/dishes.js';
+import {baseUrl} from './baseUrl';
+import axios from 'axios';
+
+
 
 
 export const addComment = (formData) => {
@@ -35,11 +38,18 @@ export const fetchDishes = ()=> {
     return dispatch => {
       dispatch(dishesLoading())
 
-      setTimeout(() => {
-        dispatch(loadDishes(DISHES));
-      }, 2000);
-
-
-
+      axios.get(baseUrl+'/dishes')
+      .then((res)=> {
+     //   console.log(res.data);
+      //  console.log(res);
+        if(res.status === 200){
+            const data = res.data;
+            dispatch(loadDishes(data));
+        }      
+      })
+      .catch((err)=> {
+        console.log(err);
+      })
+   
     }
 }

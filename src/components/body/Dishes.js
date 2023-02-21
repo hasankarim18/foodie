@@ -10,16 +10,17 @@ const Dishes = () => {
   const { dishes , isLoading} = useSelector((state) => state.dishes);
   const dispatch = useDispatch()
 
+  console.log(dishes);
+  
+
+  // loading dishes
   useEffect(()=> {
       dispatch(fetchDishes())
   }, [dispatch])
 
   const [selectedDish, setSelectedDish] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  //onst dishes = dishState.dishes.dishes;
 
- // console.log(dishes);
 
   const selectDish = (id) => {
     const selectedId = id;
@@ -29,8 +30,7 @@ const Dishes = () => {
     setSelectedDish(() => seletedDish);
   };
    const modalToggle = () => {
-      setIsModalOpen((prev)=> !prev);
-  
+      setIsModalOpen((prev)=> !prev);  
     };
 
 
@@ -55,9 +55,7 @@ const Dishes = () => {
          />
        );
      });
-    }
-
-   
+    }   
 
 
   return (

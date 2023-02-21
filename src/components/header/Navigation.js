@@ -33,23 +33,33 @@ const Navigation = () => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ms-auto" navbar>
             <NavItem>
-              <NavLink className={(isActive)=> 'nav-link' + (isActive? ' active ' :'')}  to="/home">
+              <NavLink
+                className={(isActive) =>
+                  "nav-link" + (isActive ? " active " : "")
+                }
+                to="/home"
+              >
                 Home
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="nav-link"  to="/menu">
+              <NavLink className="nav-link" to="/menu">
                 Menu
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="nav-link"  to="/about">
+              <NavLink className="nav-link" to="/about">
                 About
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="nav-link"  to="/contact">
+              <NavLink className="nav-link" to="/contact">
                 Contact us
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink className="nav-link" to="/test">
+                Testing Page
               </NavLink>
             </NavItem>
             <NavItem>

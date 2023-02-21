@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, CardImg, CardImgOverlay, CardBody, CardTitle } from "reactstrap";
 
+
 const DishItem = ({ dish, selectDish,openDishDetail }) => {
   const { name, image, id } = dish;
 
